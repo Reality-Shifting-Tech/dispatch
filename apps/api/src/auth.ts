@@ -1,6 +1,6 @@
-import { apiKeys, uuidv7 } from "@dispatch/db";
-import type { ApiKeyScope, Database } from "@dispatch/db";
-import { hashToken } from "@dispatch/domain";
+import { apiKeys, uuidv7 } from "@mailpelican/db";
+import type { ApiKeyScope, Database } from "@mailpelican/db";
+import { hashToken } from "@mailpelican/domain";
 import { and, eq, isNull } from "drizzle-orm";
 import type { Context, Next } from "hono";
 import { HTTPException } from "hono/http-exception";

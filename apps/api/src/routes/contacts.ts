@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { consentEvents, contacts, listMemberships } from "@dispatch/db";
-import { isValidEmail, normalizeEmail } from "@dispatch/domain";
+import { consentEvents, contacts, listMemberships } from "@mailpelican/db";
+import { isValidEmail, normalizeEmail } from "@mailpelican/domain";
 import { and, asc, eq, gt } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

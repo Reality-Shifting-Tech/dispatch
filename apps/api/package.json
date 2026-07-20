@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/api",
+  "name": "@mailpelican/api",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -12,12 +12,12 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dispatch/config": "workspace:*",
-    "@dispatch/contracts": "workspace:*",
-    "@dispatch/db": "workspace:*",
-    "@dispatch/domain": "workspace:*",
-    "@dispatch/relays": "workspace:*",
-    "@dispatch/render": "workspace:*",
+    "@mailpelican/config": "workspace:*",
+    "@mailpelican/contracts": "workspace:*",
+    "@mailpelican/db": "workspace:*",
+    "@mailpelican/domain": "workspace:*",
+    "@mailpelican/relays": "workspace:*",
+    "@mailpelican/render": "workspace:*",
     "@hono/node-server": "^1.14.0",
     "@hono/zod-openapi": "^0.19.0",
     "drizzle-orm": "^0.43.1",
@@ -26,9 +26,9 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@dispatch/queue": "workspace:*",
-    "@dispatch/testkit": "workspace:*",
-    "@dispatch/worker": "workspace:*",
+    "@mailpelican/queue": "workspace:*",
+    "@mailpelican/testkit": "workspace:*",
+    "@mailpelican/worker": "workspace:*",
     "@types/node": "^22.15.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",

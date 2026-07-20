@@ -1,4 +1,4 @@
-import { relays, senderIdentities, uuidv7 } from "@dispatch/db";
+import { relays, senderIdentities, uuidv7 } from "@mailpelican/db";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { auth, createTestContext, type TestContext } from "./test-utils.js";
 

@@ -1,5 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { appendOutbox, insertInboundWebhookDedup, OUTBOX_TOPICS, relays } from "@dispatch/db";
+import { appendOutbox, insertInboundWebhookDedup, OUTBOX_TOPICS, relays } from "@mailpelican/db";
 import { createHash } from "node:crypto";
 import { eq } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";

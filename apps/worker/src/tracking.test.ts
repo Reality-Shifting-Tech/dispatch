@@ -9,11 +9,11 @@ import {
   senderIdentities,
   uuidv7,
   workspaces,
-} from "@dispatch/db";
-import { createTestDb } from "@dispatch/db/testing";
-import type { Database } from "@dispatch/db";
-import { createMemoryRateLimiter } from "@dispatch/queue";
-import { FakeRelay } from "@dispatch/testkit";
+} from "@mailpelican/db";
+import { createTestDb } from "@mailpelican/db/testing";
+import type { Database } from "@mailpelican/db";
+import { createMemoryRateLimiter } from "@mailpelican/queue";
+import { FakeRelay } from "@mailpelican/testkit";
 import { eq } from "drizzle-orm";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { runCampaignSend, type PipelineDeps } from "./pipeline.js";

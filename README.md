@@ -1,10 +1,10 @@
-# dispatch 📨
+# Mail Pelican 📨
 
 > The open-source, self-hostable, agent-native email marketing platform.
 
 ![Status: early development](https://img.shields.io/badge/status-early%20development-orange)
 
-dispatch is an AGPL-3.0 Mailchimp alternative designed from the ground up for
+Mail Pelican is an AGPL-3.0 Mailchimp alternative designed from the ground up for
 self-hosters and for AI agents as first-class operators. It is currently at
 milestone **M1**: the first safe send. The `/v1` API covers contacts, lists,
 consent (including double opt-in: public subscribe → confirmation email →
@@ -34,8 +34,8 @@ export APP_URL=http://localhost:3000 \
 
 pnpm install
 pnpm build
-pnpm --filter @dispatch/db migrate   # apply database migrations
-pnpm --filter @dispatch/api bootstrap "My Workspace" "My Org Inc" "1 Main St"
+pnpm --filter @mailpelican/db migrate   # apply database migrations
+pnpm --filter @mailpelican/api bootstrap "My Workspace" "My Org Inc" "1 Main St"
 pnpm dev                             # api on :3000, web on :5173, worker
 ```
 
@@ -44,7 +44,7 @@ The bootstrap command prints the owner API key exactly once; store it. All
 
 Tests run without Docker (PGlite in-process PostgreSQL). The
 Testcontainers-based suite runs additionally when a Docker daemon is present
-and `DISPATCH_DOCKER_TESTS=1` is set.
+and `MAILPELICAN_DOCKER_TESTS=1` is set.
 
 A full all-in-one container (API + worker + web static bundle) is available via
 `docker compose -f docker/docker-compose.yml up --build app`. The image runs
@@ -73,17 +73,17 @@ docs/adr/     Architecture decision records
 
 ## Use with AI agents
 
-dispatch is being built agent-native: every operation the UI exposes is also
+Mail Pelican is being built agent-native: every operation the UI exposes is also
 reachable by automation. A first-class MCP server (`apps/mcp`) exposes the
 `/v1` surface — reads, lists, and campaign draft authoring — over stdio:
 
 ```json
 {
   "mcpServers": {
-    "dispatch": {
+    "mailpelican": {
       "command": "node",
       "args": ["apps/mcp/dist/index.js"],
-      "env": { "DISPATCH_API_URL": "http://localhost:3000", "DISPATCH_API_KEY": "dk_..." }
+      "env": { "MAILPELICAN_API_URL": "http://localhost:3000", "MAILPELICAN_API_KEY": "dk_..." }
     }
   }
 }

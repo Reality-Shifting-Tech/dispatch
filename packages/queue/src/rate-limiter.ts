@@ -1,4 +1,4 @@
-import { initialBucket, retryAfterMs, takeToken, type TokenBucketState } from "@dispatch/domain";
+import { initialBucket, retryAfterMs, takeToken, type TokenBucketState } from "@mailpelican/domain";
 import type { Redis } from "ioredis";
 
 export interface RateLimitResult {

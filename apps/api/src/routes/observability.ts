@@ -8,8 +8,8 @@ import {
   replayInboundWebhook,
   appendOutbox,
   OUTBOX_TOPICS,
-} from "@dispatch/db";
-import { DomainError } from "@dispatch/domain";
+} from "@mailpelican/db";
+import { DomainError } from "@mailpelican/domain";
 import { and, asc, eq, gt, inArray, sql } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

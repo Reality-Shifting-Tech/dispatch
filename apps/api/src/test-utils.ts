@@ -1,10 +1,10 @@
-import { loadEnv } from "@dispatch/config";
-import { apiKeys, contacts, uuidv7, workspaces } from "@dispatch/db";
-import { createTestDb } from "@dispatch/db/testing";
-import type { Database } from "@dispatch/db";
-import { FakeRelay } from "@dispatch/testkit";
-import type { RelayProvider } from "@dispatch/relays";
-import type { Env } from "@dispatch/config";
+import { loadEnv } from "@mailpelican/config";
+import { apiKeys, contacts, uuidv7, workspaces } from "@mailpelican/db";
+import { createTestDb } from "@mailpelican/db/testing";
+import type { Database } from "@mailpelican/db";
+import { FakeRelay } from "@mailpelican/testkit";
+import type { RelayProvider } from "@mailpelican/relays";
+import type { Env } from "@mailpelican/config";
 import { issueApiKey } from "./routes/api-keys.js";
 import { createApp } from "./app.js";
 import type { Deps } from "./deps.js";

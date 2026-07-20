@@ -7,9 +7,9 @@ import {
   relays,
   senderIdentities,
   workspaces,
-} from "@dispatch/db";
+} from "@mailpelican/db";
 import { and, eq } from "drizzle-orm";
-import { DomainError } from "@dispatch/domain";
+import { DomainError } from "@mailpelican/domain";
 import type { PipelineDeps } from "./pipeline.js";
 
 /**

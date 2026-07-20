@@ -11,11 +11,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - M0 foundation: pnpm + Turborepo monorepo, strict TypeScript, ESLint flat
   config with a zero-warning policy, Vitest, and GitHub Actions CI.
-- `@dispatch/config`: Zod-validated environment configuration with fail-fast
+- `@mailpelican/config`: Zod-validated environment configuration with fail-fast
   startup errors.
-- `@dispatch/db`: Drizzle schema with the `workspaces` table (UUIDv7 primary
+- `@mailpelican/db`: Drizzle schema with the `workspaces` table (UUIDv7 primary
   keys) and the initial migration.
-- `@dispatch/contracts`: RFC 9457 problem-details helpers and cursor
+- `@mailpelican/contracts`: RFC 9457 problem-details helpers and cursor
   pagination types.
 - `apps/api`: Hono bootstrap, `/health/live` and `/health/ready`, `/v1` stub
   returning 501 problem details, graceful shutdown.

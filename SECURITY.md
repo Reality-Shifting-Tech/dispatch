@@ -4,7 +4,7 @@
 
 Please do **not** open a public issue for security vulnerabilities.
 
-Email security reports to **security@dispatch.dev** (placeholder until the
+Email security reports to **security@mailpelican.com** (placeholder until the
 project domain is live; for now, open a private GitHub security advisory on
 the repository). Include:
 

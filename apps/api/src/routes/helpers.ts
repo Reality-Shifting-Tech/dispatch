@@ -1,6 +1,6 @@
-import { problemDetailsSchema } from "@dispatch/contracts";
+import { problemDetailsSchema } from "@mailpelican/contracts";
 import { OpenAPIHono, z } from "@hono/zod-openapi";
-import { PROBLEM_CONTENT_TYPE, problem } from "@dispatch/contracts";
+import { PROBLEM_CONTENT_TYPE, problem } from "@mailpelican/contracts";
 
 /** OpenAPI sub-app with problem-details validation errors (RFC 9457). */
 export function createRouter() {

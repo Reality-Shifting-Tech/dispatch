@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for your interest in dispatch. This document is the contract between
+Thanks for your interest in Mail Pelican. This document is the contract between
 you and the maintainers; please read it before opening a pull request.
 
 ## Commit conventions
@@ -46,7 +46,7 @@ wrote it deliberately:
 - Consistent naming within a module; prefer the existing vocabulary over
   introducing synonyms.
 - Errors are part of the API. Use the problem-details envelope
-  (`@dispatch/contracts`) for every non-2xx response.
+  (`@mailpelican/contracts`) for every non-2xx response.
 
 ## Development setup
 

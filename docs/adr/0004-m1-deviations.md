@@ -21,7 +21,7 @@ keep the milestone shippable without compromising any send-safety invariant.
 2. **Session auth deferred; API keys are the M1 auth surface.**
    §4 describes owner sessions and API keys. M0 shipped no user/session
    tables and M1 adds none: all `/v1` routes authenticate scoped API keys
-   (`dk_<prefix>.<secret>`, SHA-256 stored). A `pnpm --filter @dispatch/api
+   (`dk_<prefix>.<secret>`, SHA-256 stored). A `pnpm --filter @mailpelican/api
 bootstrap` command creates the first workspace + owner key. Argon2id
    sessions land with the web UI milestone. Audit attribution works fully via
    `actor_type = api_key`.
@@ -34,7 +34,7 @@ bootstrap` command creates the first workspace + owner key. Argon2id
 
 4. **Render artifacts and live DNS verification deferred.**
    `template_render_artifacts` (§4) as a separate table remains deferred; the
-   `@dispatch/render` pipeline (ADR-0002) compiles `design_json` to HTML/text
+   `@mailpelican/render` pipeline (ADR-0002) compiles `design_json` to HTML/text
    inline on the immutable template version at authoring time, and campaign
    versions carry the complete message definition inline. Sender
    identity verification runs live DNS checks (`POST

@@ -1,8 +1,8 @@
-import type { Env } from "@dispatch/config";
-import type { Database } from "@dispatch/db";
-import type { ApiKeyScope } from "@dispatch/db";
-import type { DnsResolver } from "@dispatch/domain";
-import type { RelayProvider } from "@dispatch/relays";
+import type { Env } from "@mailpelican/config";
+import type { Database } from "@mailpelican/db";
+import type { ApiKeyScope } from "@mailpelican/db";
+import type { DnsResolver } from "@mailpelican/domain";
+import type { RelayProvider } from "@mailpelican/relays";
 
 /** Authenticated caller attached to every /v1 request after auth middleware. */
 export interface Principal {

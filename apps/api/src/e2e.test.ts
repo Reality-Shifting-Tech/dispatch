@@ -1,9 +1,9 @@
-import { drainOutboxOnce } from "@dispatch/queue";
-import { contacts, listMemberships, suppressions } from "@dispatch/db";
+import { drainOutboxOnce } from "@mailpelican/queue";
+import { contacts, listMemberships, suppressions } from "@mailpelican/db";
 import { eq } from "drizzle-orm";
-import { FakeRelay } from "@dispatch/testkit";
-import { runCampaignSend, normalizeInboxWebhook, type PipelineDeps } from "@dispatch/worker";
-import { createMemoryRateLimiter } from "@dispatch/queue";
+import { FakeRelay } from "@mailpelican/testkit";
+import { runCampaignSend, normalizeInboxWebhook, type PipelineDeps } from "@mailpelican/worker";
+import { createMemoryRateLimiter } from "@mailpelican/queue";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { auth, createTestContext, testEnv, type TestContext } from "./test-utils.js";
 

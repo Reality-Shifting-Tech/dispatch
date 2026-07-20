@@ -22,8 +22,8 @@ import {
   settleRecipient,
   inboundWebhookEvents,
   relays,
-} from "@dispatch/db";
-import type { Database } from "@dispatch/db";
+} from "@mailpelican/db";
+import type { Database } from "@mailpelican/db";
 import {
   backoffDelayMs,
   appendFooter,
@@ -37,10 +37,10 @@ import {
   injectTrackingPixel,
   renderMergeTags,
   rewriteLinks,
-} from "@dispatch/domain";
-import type { Env } from "@dispatch/config";
-import type { RateLimiter } from "@dispatch/queue";
-import type { RelayProvider } from "@dispatch/relays";
+} from "@mailpelican/domain";
+import type { Env } from "@mailpelican/config";
+import type { RateLimiter } from "@mailpelican/queue";
+import type { RelayProvider } from "@mailpelican/relays";
 import { createHash } from "node:crypto";
 import { and, eq } from "drizzle-orm";
 

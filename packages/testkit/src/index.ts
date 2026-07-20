@@ -8,7 +8,7 @@ import type {
   SendContext,
   SendResult,
   VerifiedWebhook,
-} from "@dispatch/relays";
+} from "@mailpelican/relays";
 
 export interface SentRecord {
   message: PreparedMessage;

@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/relays",
+  "name": "@mailpelican/relays",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-sesv2": "^3.800.0",
-    "@dispatch/db": "workspace:*",
+    "@mailpelican/db": "workspace:*",
     "nodemailer": "^7.0.3",
     "resend": "^4.5.1"
   },

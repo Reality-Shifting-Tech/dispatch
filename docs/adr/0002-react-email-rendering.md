@@ -18,7 +18,7 @@ components, compiled to client-safe HTML at render time. MJML is rejected: its
 abstraction duplicates what React components already give us (composition,
 props, type-checking) while adding a build step we do not control.
 
-Implemented in `@dispatch/render`: editors author a typed `design-v1` JSON
+Implemented in `@mailpelican/render`: editors author a typed `design-v1` JSON
 document (heading/text/button/image/divider blocks); `POST
 /v1/templates/:id/versions` validates it and compiles HTML + plain-text
 artifacts onto the immutable version, so lint, preview, and the send pipeline

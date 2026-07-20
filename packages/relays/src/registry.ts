@@ -1,6 +1,6 @@
 import { SESv2Client } from "@aws-sdk/client-sesv2";
 import { Resend } from "resend";
-import type { RelayTypeValue } from "@dispatch/db";
+import type { RelayTypeValue } from "@mailpelican/db";
 import type { RelayProvider } from "./types.js";
 import { isAllowedSnsCertUrl, SesRelay, type SesCredentials } from "./ses.js";
 import { ResendRelay, type ResendClientLike, type ResendCredentials } from "./resend.js";

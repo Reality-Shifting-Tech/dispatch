@@ -8,9 +8,9 @@ import {
   consumeConfirmationToken,
   resolveConfirmationToken,
   OUTBOX_TOPICS,
-} from "@dispatch/db";
-import type { ConfirmationToken, Database } from "@dispatch/db";
-import { DomainError, isValidEmail, normalizeEmail } from "@dispatch/domain";
+} from "@mailpelican/db";
+import type { ConfirmationToken, Database } from "@mailpelican/db";
+import { DomainError, isValidEmail, normalizeEmail } from "@mailpelican/domain";
 import { and, eq } from "drizzle-orm";
 
 export interface SubscribeInput {

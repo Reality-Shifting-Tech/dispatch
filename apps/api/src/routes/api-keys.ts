@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { apiKeys } from "@dispatch/db";
-import { generateToken, hashToken } from "@dispatch/domain";
+import { apiKeys } from "@mailpelican/db";
+import { generateToken, hashToken } from "@mailpelican/domain";
 import { and, asc, eq, gt } from "drizzle-orm";
 import { randomBytes } from "node:crypto";
 import { HTTPException } from "hono/http-exception";

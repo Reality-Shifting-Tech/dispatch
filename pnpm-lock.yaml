@@ -40,30 +40,30 @@ importers:
 
   apps/api:
     dependencies:
-      "@dispatch/config":
-        specifier: workspace:*
-        version: link:../../packages/config
-      "@dispatch/contracts":
-        specifier: workspace:*
-        version: link:../../packages/contracts
-      "@dispatch/db":
-        specifier: workspace:*
-        version: link:../../packages/db
-      "@dispatch/domain":
-        specifier: workspace:*
-        version: link:../../packages/domain
-      "@dispatch/relays":
-        specifier: workspace:*
-        version: link:../../packages/relays
-      "@dispatch/render":
-        specifier: workspace:*
-        version: link:../../packages/render
       "@hono/node-server":
         specifier: ^1.14.0
         version: 1.19.14(hono@4.12.31)
       "@hono/zod-openapi":
         specifier: ^0.19.0
         version: 0.19.10(hono@4.12.31)(zod@3.25.76)
+      "@mailpelican/config":
+        specifier: workspace:*
+        version: link:../../packages/config
+      "@mailpelican/contracts":
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      "@mailpelican/db":
+        specifier: workspace:*
+        version: link:../../packages/db
+      "@mailpelican/domain":
+        specifier: workspace:*
+        version: link:../../packages/domain
+      "@mailpelican/relays":
+        specifier: workspace:*
+        version: link:../../packages/relays
+      "@mailpelican/render":
+        specifier: workspace:*
+        version: link:../../packages/render
       drizzle-orm:
         specifier: ^0.43.1
         version: 0.43.1(@electric-sql/pglite@0.3.16)(@types/pg@8.20.0)(pg@8.22.0)
@@ -77,13 +77,13 @@ importers:
         specifier: ^3.24.3
         version: 3.25.76
     devDependencies:
-      "@dispatch/queue":
+      "@mailpelican/queue":
         specifier: workspace:*
         version: link:../../packages/queue
-      "@dispatch/testkit":
+      "@mailpelican/testkit":
         specifier: workspace:*
         version: link:../../packages/testkit
-      "@dispatch/worker":
+      "@mailpelican/worker":
         specifier: workspace:*
         version: link:../worker
       "@types/node":
@@ -108,7 +108,7 @@ importers:
         specifier: ^3.24.3
         version: 3.25.76
     devDependencies:
-      "@dispatch/api":
+      "@mailpelican/api":
         specifier: workspace:*
         version: link:../api
       "@types/node":
@@ -167,19 +167,19 @@ importers:
 
   apps/worker:
     dependencies:
-      "@dispatch/config":
+      "@mailpelican/config":
         specifier: workspace:*
         version: link:../../packages/config
-      "@dispatch/db":
+      "@mailpelican/db":
         specifier: workspace:*
         version: link:../../packages/db
-      "@dispatch/domain":
+      "@mailpelican/domain":
         specifier: workspace:*
         version: link:../../packages/domain
-      "@dispatch/queue":
+      "@mailpelican/queue":
         specifier: workspace:*
         version: link:../../packages/queue
-      "@dispatch/relays":
+      "@mailpelican/relays":
         specifier: workspace:*
         version: link:../../packages/relays
       bullmq:
@@ -192,7 +192,7 @@ importers:
         specifier: ^5.6.0
         version: 5.11.1
     devDependencies:
-      "@dispatch/testkit":
+      "@mailpelican/testkit":
         specifier: workspace:*
         version: link:../../packages/testkit
       "@types/node":
@@ -242,7 +242,7 @@ importers:
 
   packages/db:
     dependencies:
-      "@dispatch/domain":
+      "@mailpelican/domain":
         specifier: workspace:*
         version: link:../domain
       drizzle-orm:
@@ -288,10 +288,10 @@ importers:
 
   packages/queue:
     dependencies:
-      "@dispatch/db":
+      "@mailpelican/db":
         specifier: workspace:*
         version: link:../db
-      "@dispatch/domain":
+      "@mailpelican/domain":
         specifier: workspace:*
         version: link:../domain
       bullmq:
@@ -322,7 +322,7 @@ importers:
       "@aws-sdk/client-sesv2":
         specifier: ^3.800.0
         version: 3.1090.0
-      "@dispatch/db":
+      "@mailpelican/db":
         specifier: workspace:*
         version: link:../db
       nodemailer:
@@ -381,7 +381,7 @@ importers:
 
   packages/testkit:
     dependencies:
-      "@dispatch/relays":
+      "@mailpelican/relays":
         specifier: workspace:*
         version: link:../relays
     devDependencies:

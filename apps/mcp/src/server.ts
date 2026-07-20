@@ -41,7 +41,7 @@ function qs(params: { cursor?: string | undefined; limit?: number | undefined })
  * automation with a confirmation token) confirms.
  */
 export function createDispatchMcpServer(client: DispatchClient): McpServer {
-  const server = new McpServer({ name: "dispatch", version: "0.1.0" });
+  const server = new McpServer({ name: "mailpelican", version: "0.1.0" });
 
   async function runSafely(run: () => Promise<unknown>): Promise<CallToolResult> {
     try {
@@ -52,7 +52,7 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   }
 
   server.registerTool(
-    "dispatch_list_lists",
+    "mailpelican_list_lists",
     {
       description: "List audience lists (segments) in the workspace, paginated.",
       inputSchema: pagination,
@@ -61,7 +61,7 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   );
 
   server.registerTool(
-    "dispatch_create_list",
+    "mailpelican_create_list",
     {
       description: "Create a new audience list.",
       inputSchema: z.object({
@@ -73,19 +73,19 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   );
 
   server.registerTool(
-    "dispatch_list_contacts",
+    "mailpelican_list_contacts",
     { description: "List contacts, paginated.", inputSchema: pagination },
     (args) => runSafely(() => client.get(`/contacts${qs(args)}`)),
   );
 
   server.registerTool(
-    "dispatch_list_campaigns",
+    "mailpelican_list_campaigns",
     { description: "List campaigns with their status, paginated.", inputSchema: pagination },
     (args) => runSafely(() => client.get(`/campaigns${qs(args)}`)),
   );
 
   server.registerTool(
-    "dispatch_get_campaign",
+    "mailpelican_get_campaign",
     {
       description: "Get one campaign with its current version and lifecycle status.",
       inputSchema: z.object({ campaignId: z.string().uuid() }),
@@ -94,7 +94,7 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   );
 
   server.registerTool(
-    "dispatch_campaign_stats",
+    "mailpelican_campaign_stats",
     {
       description: "Get send, delivery, bounce, complaint, and open/click totals for a campaign.",
       inputSchema: z.object({ campaignId: z.string().uuid() }),
@@ -103,13 +103,13 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   );
 
   server.registerTool(
-    "dispatch_list_templates",
+    "mailpelican_list_templates",
     { description: "List templates, paginated.", inputSchema: pagination },
     (args) => runSafely(() => client.get(`/templates${qs(args)}`)),
   );
 
   server.registerTool(
-    "dispatch_create_campaign_draft",
+    "mailpelican_create_campaign_draft",
     {
       description:
         "Create a draft campaign against an audience list. The draft must still go " +
@@ -133,7 +133,7 @@ export function createDispatchMcpServer(client: DispatchClient): McpServer {
   );
 
   server.registerTool(
-    "dispatch_preview_campaign",
+    "mailpelican_preview_campaign",
     {
       description: "Lint a campaign version and render sample messages for review.",
       inputSchema: z.object({ campaignId: z.string().uuid() }),

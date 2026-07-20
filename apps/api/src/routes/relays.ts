@@ -1,7 +1,7 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { relays, senderIdentities } from "@dispatch/db";
-import type { RelayCapabilitiesValue } from "@dispatch/db";
-import { encryptSecret, checkDnsRecords, DomainError } from "@dispatch/domain";
+import { relays, senderIdentities } from "@mailpelican/db";
+import type { RelayCapabilitiesValue } from "@mailpelican/db";
+import { encryptSecret, checkDnsRecords, DomainError } from "@mailpelican/domain";
 import { and, asc, eq, gt } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/worker",
+  "name": "@mailpelican/worker",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -17,17 +17,17 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dispatch/config": "workspace:*",
-    "@dispatch/db": "workspace:*",
-    "@dispatch/domain": "workspace:*",
-    "@dispatch/queue": "workspace:*",
-    "@dispatch/relays": "workspace:*",
+    "@mailpelican/config": "workspace:*",
+    "@mailpelican/db": "workspace:*",
+    "@mailpelican/domain": "workspace:*",
+    "@mailpelican/queue": "workspace:*",
+    "@mailpelican/relays": "workspace:*",
     "bullmq": "^5.48.0",
     "drizzle-orm": "^0.43.1",
     "ioredis": "^5.6.0"
   },
   "devDependencies": {
-    "@dispatch/testkit": "workspace:*",
+    "@mailpelican/testkit": "workspace:*",
     "@types/node": "^22.15.0",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3",

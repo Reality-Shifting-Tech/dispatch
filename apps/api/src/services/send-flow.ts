@@ -11,8 +11,8 @@ import {
   suppressions,
   uuidv7,
   workspaces,
-} from "@dispatch/db";
-import type { Campaign, CampaignVersion, Database } from "@dispatch/db";
+} from "@mailpelican/db";
+import type { Campaign, CampaignVersion, Database } from "@mailpelican/db";
 import {
   decideSendability,
   DomainError,
@@ -21,7 +21,7 @@ import {
   isCampaignEditable,
   lintCampaign,
   type LintIssue,
-} from "@dispatch/domain";
+} from "@mailpelican/domain";
 import { createHash } from "node:crypto";
 import { and, eq, isNull, sql } from "drizzle-orm";
 
@@ -208,7 +208,7 @@ export async function prepareCampaign(
 
 /**
  * Return (creating on first use) the long-lived unsubscribe token for a
- * contact/list pair. Delegates to the shared query in @dispatch/db.
+ * contact/list pair. Delegates to the shared query in @mailpelican/db.
  */
 export async function ensureUnsubscribeToken(
   db: Database,

@@ -1,4 +1,4 @@
-import { drainOutboxOnce, createMemoryRateLimiter } from "@dispatch/queue";
+import { drainOutboxOnce, createMemoryRateLimiter } from "@mailpelican/queue";
 import {
   consentEvents,
   confirmationTokens,
@@ -6,10 +6,10 @@ import {
   outbox,
   suppressions,
   uuidv7,
-} from "@dispatch/db";
+} from "@mailpelican/db";
 import { and, eq } from "drizzle-orm";
-import { generateToken } from "@dispatch/domain";
-import { sendSubscriptionConfirmation, type PipelineDeps } from "@dispatch/worker";
+import { generateToken } from "@mailpelican/domain";
+import { sendSubscriptionConfirmation, type PipelineDeps } from "@mailpelican/worker";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { auth, createTestContext, testEnv, type TestContext } from "./test-utils.js";
 

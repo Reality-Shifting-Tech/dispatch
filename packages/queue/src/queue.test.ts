@@ -1,6 +1,6 @@
-import { appendOutbox, uuidv7, workspaces } from "@dispatch/db";
-import { createTestDb } from "@dispatch/db/testing";
-import type { Database } from "@dispatch/db";
+import { appendOutbox, uuidv7, workspaces } from "@mailpelican/db";
+import { createTestDb } from "@mailpelican/db/testing";
+import type { Database } from "@mailpelican/db";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createMemoryRateLimiter } from "./rate-limiter.js";
 import { drainOutboxOnce } from "./outbox-dispatcher.js";
@@ -68,7 +68,7 @@ describe("drainOutboxOnce", () => {
     expect(first).toBe(1);
     // Not yet due after backoff: simulate retry after the row is due again by
     // marking attempts directly through a second drain with forced failure.
-    const { outbox } = await import("@dispatch/db/schema");
+    const { outbox } = await import("@mailpelican/db/schema");
     const { eq } = await import("drizzle-orm");
     await db
       .update(outbox)

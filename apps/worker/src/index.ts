@@ -1,6 +1,6 @@
-import { loadEnv } from "@dispatch/config";
-import { closeDb, createDb, relays } from "@dispatch/db";
-import { decryptSecret } from "@dispatch/domain";
+import { loadEnv } from "@mailpelican/config";
+import { closeDb, createDb, relays } from "@mailpelican/db";
+import { decryptSecret } from "@mailpelican/domain";
 import {
   campaignSendJobSchema,
   createOutboxDispatcher,
@@ -9,8 +9,8 @@ import {
   queueForTopic,
   subscriptionConfirmJobSchema,
   webhookNormalizeJobSchema,
-} from "@dispatch/queue";
-import { createRelayProvider } from "@dispatch/relays";
+} from "@mailpelican/queue";
+import { createRelayProvider } from "@mailpelican/relays";
 import { Queue, Worker } from "bullmq";
 import { eq } from "drizzle-orm";
 import { Redis } from "ioredis";

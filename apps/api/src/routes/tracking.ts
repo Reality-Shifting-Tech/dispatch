@@ -1,7 +1,7 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { insertEventDedup, messages } from "@dispatch/db";
-import { TRACKING_PIXEL_GIF } from "@dispatch/domain";
-import { PROBLEM_CONTENT_TYPE, problem } from "@dispatch/contracts";
+import { insertEventDedup, messages } from "@mailpelican/db";
+import { TRACKING_PIXEL_GIF } from "@mailpelican/domain";
+import { PROBLEM_CONTENT_TYPE, problem } from "@mailpelican/contracts";
 import { randomUUID } from "node:crypto";
 import { eq } from "drizzle-orm";
 import type { Deps } from "../deps.js";

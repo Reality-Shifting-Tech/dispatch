@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/queue",
+  "name": "@mailpelican/queue",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -16,8 +16,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dispatch/db": "workspace:*",
-    "@dispatch/domain": "workspace:*",
+    "@mailpelican/db": "workspace:*",
+    "@mailpelican/domain": "workspace:*",
     "bullmq": "^5.48.0",
     "drizzle-orm": "^0.43.1",
     "ioredis": "^5.6.0",

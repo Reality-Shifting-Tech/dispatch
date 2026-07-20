@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/db",
+  "name": "@mailpelican/db",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -26,7 +26,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dispatch/domain": "workspace:*",
+    "@mailpelican/domain": "workspace:*",
     "drizzle-orm": "^0.43.1",
     "pg": "^8.15.0"
   },

@@ -1,4 +1,4 @@
-import { generateToken, hashToken } from "@dispatch/domain";
+import { generateToken, hashToken } from "@mailpelican/domain";
 import { and, asc, eq, gt, isNull, sql } from "drizzle-orm";
 import type { Database } from "./client.js";
 import {

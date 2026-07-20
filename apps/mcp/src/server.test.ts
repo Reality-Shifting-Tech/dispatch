@@ -1,7 +1,7 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { createTestContext, type TestContext } from "@dispatch/api/src/test-utils.js";
+import { createTestContext, type TestContext } from "@mailpelican/api/src/test-utils.js";
 import { createDispatchClient } from "./client.js";
 import { createDispatchMcpServer } from "./server.js";
 
@@ -40,15 +40,15 @@ describe("dispatch MCP server", () => {
   it("exposes the curated tool surface", async () => {
     const { tools } = await client.listTools();
     const names = tools.map((t) => t.name);
-    expect(names).toContain("dispatch_list_lists");
-    expect(names).toContain("dispatch_create_campaign_draft");
-    expect(names).toContain("dispatch_campaign_stats");
-    expect(names).not.toContain("dispatch_send_campaign");
+    expect(names).toContain("mailpelican_list_lists");
+    expect(names).toContain("mailpelican_create_campaign_draft");
+    expect(names).toContain("mailpelican_campaign_stats");
+    expect(names).not.toContain("mailpelican_send_campaign");
   });
 
   it("creates and lists resources through the real API", async () => {
     const created = await client.callTool({
-      name: "dispatch_create_list",
+      name: "mailpelican_create_list",
       arguments: { name: "mcp-list", description: "created via MCP" },
     });
     expect(created.isError).toBeFalsy();
@@ -56,7 +56,7 @@ describe("dispatch MCP server", () => {
     expect(list.name).toBe("mcp-list");
 
     const listed = await client.callTool({
-      name: "dispatch_list_lists",
+      name: "mailpelican_list_lists",
       arguments: { limit: 10 },
     });
     const page = JSON.parse(textOf(listed)) as { data: { name: string }[] };
@@ -64,12 +64,12 @@ describe("dispatch MCP server", () => {
   });
 
   it("authors a draft campaign and previews it", async () => {
-    const listed = await client.callTool({ name: "dispatch_list_lists", arguments: {} });
+    const listed = await client.callTool({ name: "mailpelican_list_lists", arguments: {} });
     const page = JSON.parse(textOf(listed)) as { data: { id: string }[] };
     const listId = page.data[0]?.id ?? "";
 
     const created = await client.callTool({
-      name: "dispatch_create_campaign_draft",
+      name: "mailpelican_create_campaign_draft",
       arguments: {
         name: "mcp-campaign",
         subject: "Hello",
@@ -85,7 +85,7 @@ describe("dispatch MCP server", () => {
     expect(campaign.status).toBe("draft");
 
     const preview = await client.callTool({
-      name: "dispatch_preview_campaign",
+      name: "mailpelican_preview_campaign",
       arguments: { campaignId: campaign.id },
     });
     expect(preview.isError).toBeFalsy();
@@ -95,7 +95,7 @@ describe("dispatch MCP server", () => {
 
   it("surfaces API problem details as tool errors", async () => {
     const result = await client.callTool({
-      name: "dispatch_campaign_stats",
+      name: "mailpelican_campaign_stats",
       arguments: { campaignId: "00000000-0000-0000-0000-000000000000" },
     });
     expect(result.isError).toBe(true);

@@ -1,7 +1,7 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { suppressions } from "@dispatch/db";
-import { addSuppression } from "@dispatch/db";
-import { normalizeEmail } from "@dispatch/domain";
+import { suppressions } from "@mailpelican/db";
+import { addSuppression } from "@mailpelican/db";
+import { normalizeEmail } from "@mailpelican/domain";
 import { and, asc, eq, gt, isNull } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

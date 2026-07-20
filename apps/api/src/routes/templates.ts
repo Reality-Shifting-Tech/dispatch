@@ -1,6 +1,6 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { templates, templateVersions } from "@dispatch/db";
-import { DESIGN_SCHEMA_VERSION, designDocumentSchema, renderDesign } from "@dispatch/render";
+import { templates, templateVersions } from "@mailpelican/db";
+import { DESIGN_SCHEMA_VERSION, designDocumentSchema, renderDesign } from "@mailpelican/render";
 import { createHash } from "node:crypto";
 import { and, asc, desc, eq, gt, sql } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";

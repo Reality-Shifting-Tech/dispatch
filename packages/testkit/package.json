@@ -1,5 +1,5 @@
 {
-  "name": "@dispatch/testkit",
+  "name": "@mailpelican/testkit",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -16,7 +16,7 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@dispatch/relays": "workspace:*"
+    "@mailpelican/relays": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.15.0",

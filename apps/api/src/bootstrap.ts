@@ -1,12 +1,12 @@
 /**
  * Bootstrap a first workspace plus owner API key. Run once after migrations:
  *
- *   pnpm --filter @dispatch/api bootstrap "My Workspace" "My Org" "1 Main St"
+ *   pnpm --filter @mailpelican/api bootstrap "My Workspace" "My Org" "1 Main St"
  *
  * The raw key is printed exactly once; only its hash is stored.
  */
-import { loadEnv } from "@dispatch/config";
-import { apiKeys, closeDb, createDb, workspaces } from "@dispatch/db";
+import { loadEnv } from "@mailpelican/config";
+import { apiKeys, closeDb, createDb, workspaces } from "@mailpelican/db";
 import { eq } from "drizzle-orm";
 import { issueApiKey } from "./routes/api-keys.js";
 

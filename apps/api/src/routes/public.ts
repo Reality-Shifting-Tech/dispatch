@@ -1,5 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { consentEvents, contacts, listMemberships, lists } from "@dispatch/db";
+import { consentEvents, contacts, listMemberships, lists } from "@mailpelican/db";
 import { and, eq } from "drizzle-orm";
 import { createHash } from "node:crypto";
 import type { Deps } from "../deps.js";

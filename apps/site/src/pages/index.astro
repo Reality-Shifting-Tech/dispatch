@@ -1,7 +1,7 @@
 ---
 import "../styles/global.css";
 
-const GITHUB = "https://github.com/Reality-Shifting-Tech/dispatch";
+const GITHUB = "https://github.com/Reality-Shifting-Tech/mailpelican";
 
 const features = [
   {
@@ -31,19 +31,19 @@ const features = [
 ];
 
 const quickstart = `$ docker compose up -d postgres redis
-$ pnpm --filter @dispatch/db migrate
-$ pnpm --filter @dispatch/api bootstrap "Workspace" "Org" "1 Main St"
+$ pnpm --filter @mailpelican/db migrate
+$ pnpm --filter @mailpelican/api bootstrap "Workspace" "Org" "1 Main St"
 owner api key (store it now): dk_…
 $ pnpm dev   # api :3000 · web :5173 · worker`;
 
 const mcpConfig = `{
   "mcpServers": {
-    "dispatch": {
+    "mailpelican": {
       "command": "node",
       "args": ["apps/mcp/dist/index.js"],
       "env": {
-        "DISPATCH_API_URL": "http://localhost:3000",
-        "DISPATCH_API_KEY": "dk_..."
+        "MAILPELICAN_API_URL": "http://localhost:3000",
+        "MAILPELICAN_API_KEY": "dk_..."
       }
     }
   }
@@ -54,16 +54,16 @@ const mcpConfig = `{
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>dispatch — open-source, agent-native email marketing</title>
+    <title>Mail Pelican — open-source, agent-native email marketing</title>
     <meta
       name="description"
-      content="dispatch is the AGPL-3.0, self-hostable, agent-native email marketing platform. Safe sends, consent built in, SES/Resend/SMTP, MCP for AI agents."
+      content="Mail Pelican is the AGPL-3.0, self-hostable, agent-native email marketing platform. Safe sends, consent built in, SES/Resend/SMTP, MCP for AI agents."
     />
   </head>
   <body>
     <div class="wrap">
       <nav>
-        <a class="brand" href="/">dispatch</a>
+        <a class="brand" href="/">Mail Pelican</a>
         <div class="links">
           <a href="#features">Features</a>
           <a href="#agents">Agents</a>
@@ -76,9 +76,9 @@ const mcpConfig = `{
         <p class="kicker">Open source · AGPL-3.0 · Self-hostable</p>
         <h1>Email marketing your agents can operate.</h1>
         <p class="lede">
-          dispatch is the open-source Mailchimp alternative built for self-hosters and for AI agents
-          as first-class operators. Safe sends, consent and compliance by default, and a full API
-          everything — UI included — is built on.
+          Mail Pelican is the open-source Mailchimp alternative built for self-hosters and for AI
+          agents as first-class operators. Safe sends, consent and compliance by default, and a full
+          API everything — UI included — is built on.
         </p>
         <div class="cta">
           <a class="btn primary" href={GITHUB}>Star on GitHub</a>
@@ -101,7 +101,7 @@ const mcpConfig = `{
         <h2>Built for deliverability and safety</h2>
         <p class="sub">
           The unglamorous parts of email — consent, suppression, idempotency, bounce handling — are
-          the parts dispatch refuses to compromise on.
+          the parts Mail Pelican refuses to compromise on.
         </p>
         <div class="features">
           {

@@ -6,7 +6,7 @@ quick-reference. Where the two overlap, CONTRIBUTING wins.
 
 ## What this is
 
-dispatch is an AGPL-3.0, self-hostable, agent-native email marketing platform
+Mail Pelican is an AGPL-3.0, self-hostable, agent-native email marketing platform
 (Mailchimp alternative). TypeScript ESM monorepo: pnpm 10 workspaces + Turbo.
 Currently at milestone M1 ("first safe send") — see `docs/adr/` for decisions.
 
@@ -42,8 +42,8 @@ global config is untouched and other projects are unaffected. If a task ever
 needs one of them, flip its entry to `true` for that session. Plugin-provided
 servers (e.g. Vercel) are managed separately via `/plugins`.
 
-Scoped work: `pnpm --filter @dispatch/db <script>` (e.g. `migrate`, `generate`).
-Package names are `@dispatch/<name>`; apps are filtered by directory name
+Scoped work: `pnpm --filter @mailpelican/db <script>` (e.g. `migrate`, `generate`).
+Package names are `@mailpelican/<name>`; apps are filtered by directory name
 (e.g. `pnpm --filter api`).
 
 Local infrastructure:
@@ -54,12 +54,12 @@ docker compose -f docker/docker-compose.yml up -d postgres redis
 
 Required env vars (schema in `packages/config`): `APP_URL`, `PUBLIC_URL`,
 `TRACKING_URL`, `DATABASE_URL`, `REDIS_URL`, `CREDENTIAL_ENCRYPTION_KEY`,
-`SESSION_SECRET`. One-time setup: `pnpm --filter @dispatch/db migrate`, then
-`pnpm --filter @dispatch/api bootstrap "Workspace" "Org" "Address"` — the
+`SESSION_SECRET`. One-time setup: `pnpm --filter @mailpelican/db migrate`, then
+`pnpm --filter @mailpelican/api bootstrap "Workspace" "Org" "Address"` — the
 bootstrap prints the owner API key exactly once.
 
 Docker-based testcontainers suite only runs when a Docker daemon is present
-and `DISPATCH_DOCKER_TESTS=1` is set; don't enable it casually.
+and `MAILPELICAN_DOCKER_TESTS=1` is set; don't enable it casually.
 
 ## Layout
 
@@ -96,7 +96,7 @@ the low-level shared core. Check an ADR before reversing or adding edges.
   Use `packages/testkit` (fake relay, controlled clock) instead of real
   timers/relays.
 - Every non-2xx API response uses the problem-details envelope from
-  `@dispatch/contracts`.
+  `@mailpelican/contracts`.
 - Style bar is "edited, not generated": no narrating comments (comment the
   why or nothing), no dead code, no speculative abstractions beyond what the
   current milestone requires, reuse existing vocabulary.

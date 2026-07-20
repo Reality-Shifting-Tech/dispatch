@@ -1,5 +1,5 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { consentEvents, listMemberships, lists } from "@dispatch/db";
+import { consentEvents, listMemberships, lists } from "@mailpelican/db";
 import { and, asc, eq, gt } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

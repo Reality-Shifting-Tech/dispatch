@@ -1,7 +1,7 @@
-import { decodeCursor, encodeCursor, type CursorPage } from "@dispatch/contracts";
-import { auditEvents, idempotencyKeys } from "@dispatch/db";
-import type { Database } from "@dispatch/db";
-import { DomainError } from "@dispatch/domain";
+import { decodeCursor, encodeCursor, type CursorPage } from "@mailpelican/contracts";
+import { auditEvents, idempotencyKeys } from "@mailpelican/db";
+import type { Database } from "@mailpelican/db";
+import { DomainError } from "@mailpelican/domain";
 import type { Context } from "hono";
 import { HTTPException } from "hono/http-exception";
 import type { Principal } from "./deps.js";

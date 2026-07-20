@@ -1,6 +1,6 @@
-import { PROBLEM_CONTENT_TYPE, problem } from "@dispatch/contracts";
-import type { ApiKeyScope } from "@dispatch/db";
-import { DomainError } from "@dispatch/domain";
+import { PROBLEM_CONTENT_TYPE, problem } from "@mailpelican/contracts";
+import type { ApiKeyScope } from "@mailpelican/db";
+import { DomainError } from "@mailpelican/domain";
 import { OpenAPIHono } from "@hono/zod-openapi";
 import type { Context, Next } from "hono";
 import { HTTPException } from "hono/http-exception";
@@ -95,7 +95,7 @@ export function createApp(deps: Deps) {
 
   v1.doc("/openapi.json", {
     openapi: "3.1.0",
-    info: { title: "dispatch API", version: "0.1.0" },
+    info: { title: "Mail Pelican API", version: "0.1.0" },
   });
 
   v1.route("/", secured);

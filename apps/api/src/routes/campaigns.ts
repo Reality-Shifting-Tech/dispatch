@@ -9,15 +9,15 @@ import {
   listMemberships,
   OUTBOX_TOPICS,
   relays,
-} from "@dispatch/db";
-import type { Database } from "@dispatch/db";
+} from "@mailpelican/db";
+import type { Database } from "@mailpelican/db";
 import {
   assertCampaignTransition,
   DomainError,
   hashToken,
   hasLintErrors,
   renderMergeTags,
-} from "@dispatch/domain";
+} from "@mailpelican/domain";
 import { and, asc, eq, gt, sql } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";

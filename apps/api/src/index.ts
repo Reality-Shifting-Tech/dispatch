@@ -1,8 +1,8 @@
 import { serve } from "@hono/node-server";
-import { loadEnv } from "@dispatch/config";
-import { closeDb, createDb, relays } from "@dispatch/db";
-import { decryptSecret } from "@dispatch/domain";
-import { createRelayProvider } from "@dispatch/relays";
+import { loadEnv } from "@mailpelican/config";
+import { closeDb, createDb, relays } from "@mailpelican/db";
+import { decryptSecret } from "@mailpelican/domain";
+import { createRelayProvider } from "@mailpelican/relays";
 import { eq, sql } from "drizzle-orm";
 import { Redis } from "ioredis";
 import { resolveCname, resolveTxt } from "node:dns/promises";

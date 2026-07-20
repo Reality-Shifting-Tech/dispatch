@@ -4,7 +4,7 @@ import {
   markOutboxDispatched,
   type Database,
   type OutboxRow,
-} from "@dispatch/db";
+} from "@mailpelican/db";
 
 export interface EnqueueFn {
   (topic: string, payload: Record<string, unknown>, jobId: string): Promise<void>;

@@ -1,6 +1,6 @@
 /**
  * Server-PostgreSQL smoke test. Runs only when Docker is available and
- * DISPATCH_DOCKER_TESTS=1 is set; the default suite uses PGlite instead.
+ * MAILPELICAN_DOCKER_TESTS=1 is set; the default suite uses PGlite instead.
  * Skipping here keeps `pnpm test` green on machines without a Docker daemon.
  */
 import { execFileSync } from "node:child_process";
@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 
 const dockerAvailable = (() => {
-  if (process.env.DISPATCH_DOCKER_TESTS !== "1") {
+  if (process.env.MAILPELICAN_DOCKER_TESTS !== "1") {
     return false;
   }
   try {

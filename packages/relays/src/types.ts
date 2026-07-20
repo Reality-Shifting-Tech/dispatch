@@ -1,7 +1,7 @@
 /**
  * RelayProvider contract (architecture §8). Drivers wrap SES, Resend, and
  * generic SMTP behind this single interface so campaign logic never touches
- * provider SDKs. Tests substitute the fake relay from @dispatch/testkit.
+ * provider SDKs. Tests substitute the fake relay from @mailpelican/testkit.
  */
 
 export interface RelayCapabilities {
