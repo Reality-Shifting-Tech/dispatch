@@ -31,6 +31,7 @@ import {
   buildListUnsubscribeHeaders,
   canRetry,
   classifySendError,
+  currentWarmupCap,
   decideSendability,
   DomainError,
   evaluateRates,
@@ -284,6 +285,24 @@ export async function dispatchMessage(deps: PipelineDeps, messageId: string): Pr
     });
     if (!permit.allowed) {
       await releaseMessage(deps.db, messageId, "rate limited");
+      throw new RateLimitedError(permit.retryAfterMs);
+    }
+  }
+
+  // IP warmup: a daily cap that doubles each day of the ramp, keyed per
+  // calendar day so the budget resets every morning.
+  const warmupCap = currentWarmupCap(
+    { startedAt: bundle.relay.warmupStartedAt, days: bundle.relay.warmupDays },
+    bundle.relay.rateLimit !== null ? bundle.relay.rateLimit * 86_400 : 10_000,
+  );
+  if (warmupCap !== null) {
+    const dayKey = new Date().toISOString().slice(0, 10);
+    const permit = await deps.limiter.take(`relay-warmup:${bundle.relay.id}:${dayKey}`, {
+      ratePerSecond: warmupCap / 86_400,
+      burst: warmupCap,
+    });
+    if (!permit.allowed) {
+      await releaseMessage(deps.db, messageId, "warmup daily cap reached");
       throw new RateLimitedError(permit.retryAfterMs);
     }
   }

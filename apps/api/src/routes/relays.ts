@@ -1,7 +1,7 @@
 import { createRoute, z } from "@hono/zod-openapi";
 import { relays, senderIdentities } from "@mailpelican/db";
 import type { RelayCapabilitiesValue } from "@mailpelican/db";
-import { encryptSecret, checkDnsRecords, DomainError } from "@mailpelican/domain";
+import { encryptSecret, checkDnsRecords, currentWarmupCap, DomainError } from "@mailpelican/domain";
 import { and, asc, eq, gt } from "drizzle-orm";
 import { HTTPException } from "hono/http-exception";
 import type { Deps, Principal } from "../deps.js";
@@ -33,13 +33,21 @@ const relayInput = z.object({
   config: z.record(z.string(), z.unknown()).optional(),
   capabilities: capabilitiesSchema,
   rateLimit: z.number().int().min(1).max(100_000).optional(),
+  /** IP warmup ramp length in days; the ramp starts at relay creation. */
+  warmupDays: z.number().int().min(1).max(60).optional(),
   isDefault: z.boolean().optional(),
 });
 
 /** Relay rows never expose credentials. */
 function serializeRelay(row: typeof relays.$inferSelect) {
   const { credentialsEncrypted: _drop, ...rest } = row;
-  return rest;
+  return {
+    ...rest,
+    currentWarmupDailyCap: currentWarmupCap(
+      { startedAt: row.warmupStartedAt, days: row.warmupDays },
+      row.rateLimit !== null ? row.rateLimit * 86_400 : 10_000,
+    ),
+  };
 }
 
 /** Relay configuration and connection testing. */
@@ -97,6 +105,8 @@ export function relayRoutes(deps: Deps) {
           config: input.config ?? {},
           capabilities: input.capabilities as RelayCapabilitiesValue,
           rateLimit: input.rateLimit ?? null,
+          warmupStartedAt: input.warmupDays !== undefined ? new Date() : null,
+          warmupDays: input.warmupDays ?? null,
           isDefault: input.isDefault ?? false,
         })
         .returning();

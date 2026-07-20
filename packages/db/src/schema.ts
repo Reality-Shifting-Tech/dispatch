@@ -225,6 +225,9 @@ export const relays = pgTable("relays", {
   capabilities: jsonb("capabilities").$type<RelayCapabilitiesValue>().notNull(),
   /** Sustained send rate in messages per second; null means unlimited. */
   rateLimit: integer("rate_limit"),
+  /** IP warmup ramp start and length in days; both null means warmup off. */
+  warmupStartedAt: timestamp("warmup_started_at", { withTimezone: true }),
+  warmupDays: integer("warmup_days"),
   status: relayStatusEnum("status").notNull().default("pending"),
   lastTestedAt: timestamp("last_tested_at", { withTimezone: true }),
   isDefault: boolean("is_default").notNull().default(false),

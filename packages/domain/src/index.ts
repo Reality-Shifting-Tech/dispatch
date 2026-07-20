@@ -13,3 +13,4 @@ export * from "./tracking.js";
 export * from "./dns-verification.js";
 export * from "./deliverability.js";
 export * from "./dmarc.js";
+export * from "./warmup.js";
