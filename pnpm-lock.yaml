@@ -126,6 +126,12 @@ importers:
 
   apps/site:
     dependencies:
+      "@fontsource-variable/bricolage-grotesque":
+        specifier: ^5.3.0
+        version: 5.3.0
+      "@fontsource-variable/outfit":
+        specifier: ^5.3.0
+        version: 5.3.0
       astro:
         specifier: ^5.7.0
         version: 5.18.2(@types/node@22.20.1)(ioredis@5.11.1)(rollup@4.62.2)(tsx@4.23.1)(typescript@5.9.3)(yaml@2.9.0)
@@ -1773,6 +1779,18 @@ packages:
         integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==,
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
+
+  "@fontsource-variable/bricolage-grotesque@5.3.0":
+    resolution:
+      {
+        integrity: sha512-TLi9Q4hJjS2UvoTMRSS2nHu6c4R56lAw60NR9QYtVRCHn0XtsFpiEhNffZ8Glsoxu6wEEwLKBP8lb94J52PNBA==,
+      }
+
+  "@fontsource-variable/outfit@5.3.0":
+    resolution:
+      {
+        integrity: sha512-fPb5XnYK0k7SbR++HEmm4+ZqDszmLKQ+sPRUr8oQ/KNC0vy6r6hazJFe8iYozv4cqlHbvJ/JECkJWrfDodUMVQ==,
+      }
 
   "@grpc/grpc-js@1.14.4":
     resolution:
@@ -8521,6 +8539,10 @@ snapshots:
     dependencies:
       "@eslint/core": 0.17.0
       levn: 0.4.1
+
+  "@fontsource-variable/bricolage-grotesque@5.3.0": {}
+
+  "@fontsource-variable/outfit@5.3.0": {}
 
   "@grpc/grpc-js@1.14.4":
     dependencies:
