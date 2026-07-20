@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useState } from "react";
 import type { Api, Campaign, CampaignStats } from "../api.js";
 import { CampaignForm } from "./CampaignForm.js";
 import { PreviewPanel } from "./CampaignPreview.js";
+import { SendPanel } from "./CampaignSend.js";
 
 function StatCard({ label, value }: { label: string; value: number }) {
   return (
@@ -56,7 +57,10 @@ function StatsPanel({ api, campaignId }: { api: Api; campaignId: string }) {
 export function CampaignsView({ api }: { api: Api }) {
   const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [cursor, setCursor] = useState<string | null>(null);
-  const [expanded, setExpanded] = useState<{ id: string; panel: "stats" | "preview" } | null>(null);
+  const [expanded, setExpanded] = useState<{
+    id: string;
+    panel: "stats" | "preview" | "send";
+  } | null>(null);
   const [showForm, setShowForm] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
@@ -81,7 +85,7 @@ export function CampaignsView({ api }: { api: Api }) {
     load(null);
   }, [load]);
 
-  function toggle(id: string, panel: "stats" | "preview") {
+  function toggle(id: string, panel: "stats" | "preview" | "send") {
     setExpanded((current) =>
       current !== null && current.id === id && current.panel === panel ? null : { id, panel },
     );
@@ -123,6 +127,11 @@ export function CampaignsView({ api }: { api: Api }) {
                 </td>
                 <td className="muted">{new Date(campaign.updatedAt).toLocaleString()}</td>
                 <td>
+                  {campaign.status === "ready" && (
+                    <button className="link-button" onClick={() => toggle(campaign.id, "send")}>
+                      {expanded?.id === campaign.id && expanded.panel === "send" ? "Hide" : "Send"}
+                    </button>
+                  )}{" "}
                   {(campaign.status === "draft" || campaign.status === "ready") && (
                     <button className="link-button" onClick={() => toggle(campaign.id, "preview")}>
                       {expanded?.id === campaign.id && expanded.panel === "preview"
@@ -138,10 +147,14 @@ export function CampaignsView({ api }: { api: Api }) {
               {expanded?.id === campaign.id && (
                 <tr>
                   <td colSpan={4}>
-                    {expanded.panel === "stats" ? (
+                    {expanded.panel === "stats" && (
                       <StatsPanel api={api} campaignId={campaign.id} />
-                    ) : (
+                    )}
+                    {expanded.panel === "preview" && (
                       <PreviewPanel api={api} campaignId={campaign.id} />
+                    )}
+                    {expanded.panel === "send" && (
+                      <SendPanel api={api} campaignId={campaign.id} onSent={() => load(null)} />
                     )}
                   </td>
                 </tr>

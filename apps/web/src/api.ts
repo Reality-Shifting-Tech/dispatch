@@ -64,6 +64,17 @@ export interface CampaignDraftInput {
   previewText?: string;
 }
 
+export interface PreparedCampaign {
+  campaignId: string;
+  campaignVersionId: string;
+  included: number;
+  excluded: number;
+  audienceHash: string;
+  confirmationToken: string;
+  expiresAt: string;
+  approvalRequired: boolean;
+}
+
 export class ApiError extends Error {
   readonly status: number;
 
@@ -87,12 +98,18 @@ export function clearApiKey(): void {
 }
 
 export function createApi(getKey: () => string | null, onUnauthorized: () => void) {
-  async function call<T>(method: string, path: string, body?: unknown): Promise<T> {
+  async function call<T>(
+    method: string,
+    path: string,
+    body?: unknown,
+    extraHeaders?: Record<string, string>,
+  ): Promise<T> {
     const res = await fetch(path, {
       method,
       headers: {
         authorization: `Bearer ${getKey() ?? ""}`,
         "content-type": "application/json",
+        ...extraHeaders,
       },
       ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
     });
@@ -126,6 +143,14 @@ export function createApi(getKey: () => string | null, onUnauthorized: () => voi
     campaignStats: (id: string) => call<CampaignStats>("GET", `/v1/stats/campaigns/${id}`),
     createCampaign: (input: CampaignDraftInput) => call<Campaign>("POST", "/v1/campaigns", input),
     previewCampaign: (id: string) => call<CampaignPreview>("POST", `/v1/campaigns/${id}/preview`),
+    prepareCampaign: (id: string) => call<PreparedCampaign>("POST", `/v1/campaigns/${id}/prepare`),
+    confirmSend: (id: string, confirmationToken: string, approved: boolean) =>
+      call<{ recipientCount: number }>(
+        "POST",
+        `/v1/campaigns/${id}/confirm-send`,
+        { confirmationToken, approved },
+        { "idempotency-key": crypto.randomUUID() },
+      ),
     listLists: (cursor: string | null) =>
       call<Page<AudienceList>>("GET", page("/v1/lists", cursor)),
     createList: (name: string, description: string) =>
