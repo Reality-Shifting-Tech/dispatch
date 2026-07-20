@@ -1,0 +1,55 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: dispatch
+      POSTGRES_PASSWORD: dispatch
+      POSTGRES_DB: dispatch
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dispatch"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # All-in-one image: API, worker, and the built web bundle.
+  # Requires `pnpm install && pnpm build` to have produced dist/ output,
+  # or build the image itself with `docker compose build app`.
+  app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      APP_URL: http://localhost:3000
+      PUBLIC_URL: http://localhost:3000
+      TRACKING_URL: http://localhost:3000
+      DATABASE_URL: postgres://dispatch:dispatch@postgres:5432/dispatch
+      REDIS_URL: redis://redis:6379
+      CREDENTIAL_ENCRYPTION_KEY: dev-only-key-change-me-000000
+      SESSION_SECRET: dev-only-secret-change-me-00000
+    ports:
+      - "3000:3000"
+      - "8080:8080"
+
+volumes:
+  postgres-data:
