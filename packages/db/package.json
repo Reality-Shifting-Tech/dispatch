@@ -11,6 +11,10 @@
     "./schema": {
       "types": "./src/schema.ts",
       "import": "./dist/schema.js"
+    },
+    "./testing": {
+      "types": "./src/testing.ts",
+      "import": "./dist/testing.js"
     }
   },
   "scripts": {
@@ -18,16 +22,20 @@
     "dev": "tsc -p tsconfig.build.json --watch",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "generate": "drizzle-kit generate",
-    "migrate": "drizzle-kit migrate"
+    "migrate": "drizzle-kit migrate",
+    "test": "vitest run"
   },
   "dependencies": {
     "drizzle-orm": "^0.43.1",
     "pg": "^8.15.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.3.0",
+    "@testcontainers/postgresql": "^12.0.4",
     "@types/node": "^22.15.0",
     "@types/pg": "^8.11.11",
     "drizzle-kit": "^0.31.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.0"
   }
 }
