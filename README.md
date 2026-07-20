@@ -7,10 +7,12 @@
 dispatch is an AGPL-3.0 Mailchimp alternative designed from the ground up for
 self-hosters and for AI agents as first-class operators. It is currently at
 milestone **M1**: the first safe send. The `/v1` API covers contacts, lists,
-consent, suppressions, relays (SES v2, Resend, SMTP), sender identities,
-templates, campaigns (lint → preview → prepare → confirmation token → send),
-provider webhook inbox, RFC 8058 one-click unsubscribe, stats, and audit
-events. The worker runs the outbox-backed send pipeline with per-dispatch
+consent (including double opt-in: public subscribe → confirmation email →
+single-use confirm), suppressions, relays (SES v2, Resend, SMTP), sender
+identities, templates, campaigns (lint → preview → prepare → confirmation
+token → send), provider webhook inbox, RFC 8058 one-click unsubscribe,
+open/click tracking (pixel + redirect links, per-contact opt-out), stats, and
+audit events. The worker runs the outbox-backed send pipeline with per-dispatch
 consent rechecks and bounce/complaint auto-pause.
 
 ## Quickstart
@@ -53,6 +55,7 @@ A full all-in-one container (API + worker + web static bundle) is available via
 ```
 apps/
   api/        Hono REST API under /v1, OpenAPI, API-key auth, public routes
+  mcp/        MCP server (stdio) exposing the /v1 surface to agents
   web/        Vite + React 19 control surface (stub)
   worker/     BullMQ worker: send pipeline, webhook normalization, scheduler
 packages/
@@ -61,6 +64,7 @@ packages/
   domain/     State machines, consent decisions, tokens, merge tags, retry
   contracts/  API conventions: RFC 9457 problem details, cursor pagination
   relays/     RelayProvider contract + SES v2 / Resend / SMTP drivers
+  render/     React Email design documents → HTML/text artifacts (ADR-0002)
   queue/      Job contracts, outbox dispatcher, rate limiters
   testkit/    Fake relay, controlled clock
 docker/       docker-compose for local dev and the all-in-one image
@@ -69,9 +73,24 @@ docs/adr/     Architecture decision records
 
 ## Use with AI agents
 
-dispatch is being built agent-native: every operation the UI exposes will also
-be reachable by automation. A first-class MCP server is planned for an upcoming
-milestone; watch this space.
+dispatch is being built agent-native: every operation the UI exposes is also
+reachable by automation. A first-class MCP server (`apps/mcp`) exposes the
+`/v1` surface — reads, lists, and campaign draft authoring — over stdio:
+
+```json
+{
+  "mcpServers": {
+    "dispatch": {
+      "command": "node",
+      "args": ["apps/mcp/dist/index.js"],
+      "env": { "DISPATCH_API_URL": "http://localhost:3000", "DISPATCH_API_KEY": "dk_..." }
+    }
+  }
+}
+```
+
+Sending is deliberately not an MCP tool: an agent drafts and previews, the
+confirmed send stays behind the single-use confirmation flow.
 
 ## Documentation
 
