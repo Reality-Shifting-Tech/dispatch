@@ -113,7 +113,53 @@ export interface Relay {
   warmupDays: number | null;
   warmupStartedAt: string | null;
   currentWarmupDailyCap: number | null;
+  isDefault: boolean;
+  createdAt: string;
 }
+
+export interface SenderIdentity {
+  id: string;
+  relayId: string | null;
+  domain: string;
+  fromEmail: string;
+  fromName: string;
+  verificationStatus: string;
+  dnsRecords: { type: string; name: string; value: string }[];
+  createdAt: string;
+}
+
+export interface RelayInput {
+  type: "ses" | "resend" | "smtp";
+  name: string;
+  credentials: Record<string, string>;
+  rateLimit?: number;
+  warmupDays?: number;
+  isDefault?: boolean;
+}
+
+const RELAY_CAPABILITIES: Record<string, Record<string, boolean>> = {
+  ses: {
+    providerIdempotency: true,
+    deliveryEvents: true,
+    bounceEvents: true,
+    complaintEvents: true,
+    scheduling: false,
+  },
+  resend: {
+    providerIdempotency: true,
+    deliveryEvents: true,
+    bounceEvents: true,
+    complaintEvents: true,
+    scheduling: false,
+  },
+  smtp: {
+    providerIdempotency: false,
+    deliveryEvents: false,
+    bounceEvents: false,
+    complaintEvents: false,
+    scheduling: false,
+  },
+};
 
 export class ApiError extends Error {
   readonly status: number;
@@ -221,6 +267,22 @@ export function createApi(getKey: () => string | null, onUnauthorized: () => voi
         `/v1/deliverability/dmarc-reports?domain=${encodeURIComponent(domain)}`,
       ),
     listRelays: (cursor: string | null) => call<Page<Relay>>("GET", page("/v1/relays", cursor)),
+    createRelay: (input: RelayInput) =>
+      call<Relay>("POST", "/v1/relays", {
+        ...input,
+        capabilities: RELAY_CAPABILITIES[input.type],
+      }),
+    testRelay: (id: string) =>
+      call<{ health: { ok: boolean; detail: string } }>("POST", `/v1/relays/${id}/test-connection`),
+    listIdentities: (cursor: string | null) =>
+      call<Page<SenderIdentity>>("GET", page("/v1/sender-identities", cursor)),
+    createIdentity: (input: { domain: string; fromEmail: string; fromName: string }) =>
+      call<SenderIdentity>("POST", "/v1/sender-identities", input),
+    verifyIdentity: (id: string) =>
+      call<SenderIdentity & { dns: { found: boolean }[] }>(
+        "POST",
+        `/v1/sender-identities/${id}/verify`,
+      ),
   };
 }
 
